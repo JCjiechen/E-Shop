@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv/config');
 const productsRounter = require('./routers/products');
+const categoriesRounter = require('./routers/categories');
 const api = process.env.API_URL;
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(morgan('tiny'));
 
 // Routers
 app.use(`${api}/products`, productsRounter);
+app.use(`${api}/categories`, categoriesRounter);
 
 mongoose.connect(encodeURI(process.env.CONNECTION), {
     dbName: 'E-Shop'
