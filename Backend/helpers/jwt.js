@@ -19,7 +19,7 @@ function authJwt() {
 
 async function isRevoked(req, token) {
     // token now contains payload data
-    console.log(token);
+    // console.log(token);
 
     if (!token.payload.isAdmin) {
         // if the isAdmin flag in payload is false, then we reject the token
