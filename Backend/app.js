@@ -5,6 +5,9 @@ const cors = require('cors');
 require('dotenv/config');
 const productsRounter = require('./routers/products');
 const categoriesRounter = require('./routers/categories');
+const usersRounter = require('./routers/users');
+const authJwt = require('./helpers/jwt');
+const errorHandler = require('./helpers/error-handler');
 const api = process.env.API_URL;
 
 const app = express();
@@ -14,10 +17,13 @@ app.options('*', cors());
 // middleware
 app.use(express.json());
 app.use(morgan('tiny'));
+app.use(authJwt());
+app.use(errorHandler);
 
 // Routers
 app.use(`${api}/products`, productsRounter);
 app.use(`${api}/categories`, categoriesRounter);
+app.use(`${api}/users`, usersRounter);
 
 mongoose.connect(encodeURI(process.env.CONNECTION), {
     dbName: 'E-Shop'
